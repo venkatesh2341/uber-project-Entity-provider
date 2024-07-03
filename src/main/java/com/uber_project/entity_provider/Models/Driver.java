@@ -29,6 +29,9 @@ public class Driver extends BaseModel{
     @Column(nullable = true)
     private String phoneNumber;
 
+    @Column(nullable = false)
+    private String aadhaar;
+
     // 1 : n , Driver : Booking
     @OneToMany(mappedBy = "driver", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @Fetch(FetchMode.SUBSELECT)
