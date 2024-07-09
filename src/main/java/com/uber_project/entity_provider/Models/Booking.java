@@ -12,28 +12,32 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+//@Table(indexes = {
+//        @Index(columnList = "driver_id")
+//})
 public class Booking extends BaseModel{
 
     @Enumerated(value = EnumType.STRING)
-
     private BookingStatus bookingStatus;
 
-    @Column(nullable = false)
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date startTime;
 
-    @Column(nullable = false)
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date endTime;
 
-    @Column(nullable = false)
     private Long totalDistance;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToOne(fetch = FetchType.LAZY)
     private Driver driver;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToOne(fetch = FetchType.LAZY)
     private Passenger passenger;
+
+    @OneToOne
+    private ExactLocation startLocation;
+
+    @OneToOne
+    private ExactLocation endLocation;
 
 }
